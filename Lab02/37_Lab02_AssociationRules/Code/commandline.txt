@@ -1,0 +1,1 @@
+python Team37_Apriori.py input.csv FI.txt AR.txt 0.3 0.8

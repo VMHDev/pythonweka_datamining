@@ -1,0 +1,310 @@
+from sys import argv
+import csv
+
+##########################################################################################################################################################
+##########################################################################################################################################################
+# Khai báo class
+class ItemFrequent():
+    # Khai báo các thuộc tính:
+    ItemSet = []
+    Support = 0
+    SupportCount = 0
+
+    # Phương thức khởi tạo
+    def __init__(self, _ItemSet = [], _Support = 0, _SupportCount = 0):
+        self.ItemSet = _ItemSet
+        self.Support = _Support
+        self.SupportCount = _SupportCount
+
+    # Phương thức xuất dữ liệu
+    def ToString(self):
+        return str(round(self.Support, 2)) + ' ' + ', '.join(self.ItemSet)
+
+class ItemAssociation():
+    # Khai báo các thuộc tính:
+    ItemPremise = []
+    ItemResult = []
+    Confidence = 0
+
+    # Phương thức khởi tạo
+    def __init__(self, _ItemPremise = [], _ItemResult = [], _Confidence = 0):
+        self.ItemPremise = _ItemPremise
+        self.ItemResult = _ItemResult
+        self.Confidence = _Confidence
+
+    # Phương thức xuất dữ liệu
+    def ToString(self):
+        return str(round(self.Confidence, 2)) + ' ' + ', '.join(self.ItemPremise) + ' -> ' + ', '.join(self.ItemResult)
+##########################################################################################################################################################
+##########################################################################################################################################################
+# Hàm đọc file dữ liệu:
+def ReadFileCSV(_PathInput, _NameItem):
+    dataAP = []
+    try:
+        # Đảm bảo là file .csv
+        extension = '.csv'
+        if extension not in _PathInput:
+            _PathInput += extension
+
+        with open(_PathInput) as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter=',')
+            dataAP = list(csv_reader)
+
+        # Lấy tên các item
+        for name in dataAP[0]:
+            _NameItem.append(name)
+
+        # Xóa header - Trả về tập dữ liệu không header
+        del dataAP[0]
+    except:
+      print("Không tìm thấy file hoặc file không hợp lệ!")
+    return dataAP
+
+# Hàm ghi file tập phổ biến
+def WriteFileFI(_PathOutputFI, _DataFreq):
+    f2 = open(_PathOutputFI, 'w+')
+    for item in _DataFreq:
+        if item == _DataFreq[-1]:
+            f2.write(item.ToString())
+        else:
+            f2.write(item.ToString() + '\n')
+
+# Hàm phát sinh tập ứng viên C1
+def GenCandicate(_DataHeader, _DataAP):
+    # Lấy danh sách tên các item
+    lstItemCand = []
+    for item in _DataHeader:
+        objItemAP = ItemFrequent([], 0, 0)
+        objItemAP.ItemSet.append(item)
+        lstItemCand.append(objItemAP)
+
+    # Xác định Support Count (Đếm hỗ trợ) của các item
+    for itemTrans in _DataAP:
+        for index, item in enumerate(itemTrans):
+            if(item == 'y'):
+                lstItemCand[index].SupportCount += 1
+
+    return lstItemCand
+
+# Hàm phát sinh tập phổ biến F1
+def GenFrequentItemset(_DataCand, _MinSupp, _DataSize):
+    lstFreItem = []
+    # Xác định item thỏa minsupp để đưa vào F
+    for itemCand in _DataCand:
+        itemCand.Support = itemCand.SupportCount/_DataSize
+        if(itemCand.Support >= _MinSupp):
+            lstFreItem.append(itemCand)
+    return lstFreItem
+
+#-------------------------------------------------------------------------------------------------------------------------------------
+# Hàm kiểm tra tổ hợp item có hợp lệ
+def IsValidCombine(_ItemFirst, _ItemSecond, _Step):
+    for i in range(_Step):
+        if(_ItemFirst.ItemSet[i] != _ItemSecond.ItemSet[i]):
+            return False
+    return True
+
+# Tạo danh sách các giao dịch từ dữ liệu đầu vào
+# _DataAP: Dữ liệu dạng 'y' - 'n'
+# _NameItem: Tên của các item
+def CreateListTransactionFromInput(_DataAP, _NameItem):
+    lstTrans = []
+    trans = []
+    for itemTrans in _DataAP:
+        for index, item in enumerate(itemTrans):
+            if(item == 'y'):
+                trans.append(_NameItem[index])
+        lstTrans.append(trans.copy())
+        trans.clear()
+    return lstTrans
+
+# Lấy đếm độ trợ - support count của các item
+# _LstTrans: Danh sách các giao dịch
+# _ItemFrequent: ItemFrequent cần lấy support count
+def GetSuppportCountItem(_LstTrans, _ItemFrequent):
+    iSupp = 0
+    for trans in _LstTrans:
+        check = True
+        for i in range(len(_ItemFrequent.ItemSet)):
+            if(_ItemFrequent.ItemSet[i] not in trans):
+                check = False
+                break
+        if(check):
+            iSupp += 1
+    return iSupp
+
+# Hàm phát sinh tập ứng viên Ck
+def GenCandicate_K(_DataF1, _DataAP, _NameItem, _Step):
+    # Lấy danh sách tên các item
+    lstItemCand = []
+    for i in range(len(_DataF1)):
+        for j  in range(i + 1, len(_DataF1)):
+            if(IsValidCombine(_DataF1[i], _DataF1[j], _Step)):
+                objItemAP = ItemFrequent([], 0, 0)
+                itemCombine = []
+                itemCombine = _DataF1[i].ItemSet.copy()
+                itemCombine.append(_DataF1[j].ItemSet[-1])
+                objItemAP.ItemSet = itemCombine.copy()
+                lstItemCand.append(objItemAP)        
+
+    #Xác định Support Count (Đếm hỗ trợ) của các item
+    lstTrans = CreateListTransactionFromInput(_DataAP, _NameItem)
+    for item in lstItemCand:
+        item.SupportCount = GetSuppportCountItem(lstTrans, item)
+    return lstItemCand
+
+# Hàm phát sinh tập phổ biến Fk
+def GenFrequentItemset_K(_DataCandF1, _MinSupp, _DataSize):
+    lstFreItem = []
+    # Xác định item thỏa minsupp để đưa vào F
+    for itemCand in _DataCandF1:
+        itemCand.Support = itemCand.SupportCount/_DataSize
+        if(itemCand.Support >= _MinSupp):
+            lstFreItem.append(itemCand)
+    return lstFreItem
+
+#-----------------------------------------------------------------------------------------------------------------------------------
+# Hàm điều kiện dừng của Apriori:
+def IsFrequentItemsetEmpty(_Step, _DataFk):
+    # Fk rỗng
+    if(_Step - 1 > len(_DataFk)):
+        return False
+    # Không còn hạng mục
+    if(len(_DataFk[_Step - 1].ItemSet) == 0):
+        return False
+    return True
+
+#-----------------------------------------------------------------------------------------------------------------------------------
+# Lấy đếm độ trợ - support count của các item
+# _LstTrans: Danh sách các giao dịch
+# _Item (List): Item cần lấy support count
+def GetSuppportCountItem2(_LstTrans, _Item):
+    iSupp = 0
+    for trans in _LstTrans:
+        check = True
+        for i in range(len(_Item)):
+            if(_Item[i] not in trans):
+                check = False
+                break
+        if(check):
+            iSupp += 1
+    return iSupp
+
+# Tìm tập phổ biến
+def GenAssociationRules(_DataFre, _LstTrans, _MinConf):
+    lstAss = []
+    for itemFre in _DataFre:
+        if(len(itemFre.ItemSet) > 1):
+            # Tính Độ tin cậy confidence
+            for i in range(len(itemFre.ItemSet)):
+                itmAss = ItemAssociation([], [], 0)
+                itmA = [itemFre.ItemSet[i]]
+                iSupp = GetSuppportCountItem2(_LstTrans, itmA)
+                fConf = itemFre.SupportCount / iSupp
+                if(fConf >= _MinConf):
+                    itmAss.ItemPremise = itmA.copy()
+                    itmB = set(itemFre.ItemSet)-set(itmA)
+                    itmAss.ItemResult = itmB.copy()
+                    itmAss.Confidence = fConf
+                    lstAss.append(itmAss)
+    return lstAss
+
+# Tìm tập phổ biến
+def GenAssociationRules2(_DataFre, _LstTrans, _MinConf):
+    lstAss = []
+    for itemFre in _DataFre:
+        if(len(itemFre.ItemSet) > 1):
+            # Tính Độ tin cậy confidence
+            for item in itemFre.ItemSet:
+                itmAss = ItemAssociation([], [], 0)
+                itmA = set(itemFre.ItemSet) - set([item])
+                iSupp = GetSuppportCountItem2(_LstTrans, list(itmA))
+                fConf = itemFre.SupportCount / iSupp
+                if(fConf >= _MinConf):
+                    itmAss.ItemPremise = itmA.copy()
+                    itmB = set(itemFre.ItemSet) - set(itmA)
+                    itmAss.ItemResult = itmB.copy()
+                    itmAss.Confidence = fConf
+                    lstAss.append(itmAss)
+    return lstAss
+        
+
+#-----------------------------------------------------------------------------------------------------------------------------------
+def main(argv):
+    # Lấy thông tin các tham số
+    pathInput = argv[1]             # Đường dẫn file input dữ liệu khảo sát
+    pathOutputFI = argv[2]          # Đường dẫn file output danh sách tập hạng mục phổ biến
+    pathOutputAR = argv[3]          # Đường dẫn file output danh sách các luật kết hợp
+    sMinSupp = argv[4]              # Giá trị độ phổ biến tối thiểu
+    sMinConf = argv[5]              # Giá trị độ tin cậy tối thiểu
+
+    # Xử lý các tham số
+    iMinSupp = float(sMinSupp)
+    iMinConf = float(sMinConf)
+
+    # Đọc file
+    lstNameItem = []
+    dataAP = ReadFileCSV(pathInput, lstNameItem)
+    if(len(dataAP) == 0):
+        return
+
+    ################################################################################################################################
+    # Xác định tập phổ biến
+    print('----------------------- TẬP PHỔ BIẾN -----------------------')
+    print('---------------- Tìm tập phổ biến 1 hạng mục ---------------')    
+    dataCand1 = GenCandicate(lstNameItem, dataAP)
+    dataFreq1 = GenFrequentItemset(dataCand1, iMinSupp, len(dataAP))
+    print('\tTìm được: ' + str(len(dataFreq1)) + ' tập phổ biến')
+    for item in dataFreq1:
+        print(item.ToString())
+
+    #--------------------------------------------------------------------------------------------------------------        
+    print('---------------- Tìm tập phổ biến 2 hạng mục ---------------') 
+    dataCand2 = GenCandicate_K(dataFreq1, dataAP, lstNameItem, 0)
+    dataFreq2 = GenFrequentItemset_K(dataCand2, iMinSupp, len(dataAP))
+    print('\tTìm được: ' + str(len(dataFreq2)) + ' tập phổ biến')
+    for item in dataFreq2:
+        print(item.ToString())
+
+    #--------------------------------------------------------------------------------------------------------------
+    datars = dataFreq1.copy()
+    datars.extend(dataFreq2)
+
+    #--------------------------------------------------------------------------------------------------------------
+    iStep = 1
+    dataFreq = dataFreq2.copy()
+    while(IsFrequentItemsetEmpty(iStep,dataFreq)):
+        dataCandk = GenCandicate_K(dataFreq, dataAP, lstNameItem, iStep)
+        dataFreqk = GenFrequentItemset_K(dataCandk, iMinSupp, len(dataAP))
+        iStep += 1
+        dataFreq.clear()
+        dataFreq = dataFreqk.copy()
+        datars.extend(dataFreq)
+        print('---------------- Tìm tập phổ biến '+ str(iStep + 1) + ' hạng mục ---------------')        
+        print('\tTìm được: ' + str(len(dataFreqk)) + ' tập phổ biến')
+        for item in dataFreqk:
+            print(item.ToString())        
+        break
+
+    WriteFileFI(pathOutputFI, datars)
+
+    ################################################################################################################################
+    # Phát sinh tập phổ biến
+    print('----------------------- LUẬT KẾT HỢP -----------------------')      
+    lstTrans = CreateListTransactionFromInput(dataAP, lstNameItem)
+    dataAss = GenAssociationRules(datars, lstTrans, iMinConf)
+    print('\tTìm được: ' + str(len(dataAss)) + ' luật kết hợp')      
+    for item in dataAss:
+        print(item.ToString())
+
+    datarsAss = dataAss.copy()
+    dataAss2 = GenAssociationRules2(datars, lstTrans, iMinConf)
+    print('\tTìm được thêm: ' + str(len(dataAss2)) + ' luật kết hợp (có các luật trùng)!')      
+    for item in dataAss:
+        print(item.ToString())
+    
+    datarsAss.extend(dataAss2)
+    WriteFileFI(pathOutputAR, datarsAss)
+
+if __name__ == "__main__":
+    main(argv)

@@ -1,0 +1,15 @@
+cHUONG TRINH HO TRO FILE countries.tx ENDCODING LA ANSI
+Chuong trinh ho tro chuan hoa file countries.txt thanh file csv
+1. Xoa cac du lieu rong
+2. Xoa cac mau bi trung
+3. Chuyen area tu mi sang km
+Chuc nang: "Xoa du lieu co truong area bi rong" - su dung chuong trinh 37_B1 de thuc hien chuc nang nay
+
+Cach thuc thi chuong trinh chay bang cmd:
+Co 2 cach de thuc thi chuong trinh:
+1. Thuc thi bang file py: python <ten chuong trinh .py> <file input .csv>
+2. Thuc thi bang file .exe theo duong dan Executable/dist/37_B2: <ten chuong trinh .exe> <file input .csv>
+
+Vi yeu cau quy dinh file output la :37_B2.csv nen se khong co du lieu dau vao cho file output
+Sau khi co duoc file output 37_B2.csv
+Dem file 37_B2.csv sang chuong trinh: 37_B1 de thuc hien chuc nang "Xoa du lieu co truong area bi rong"

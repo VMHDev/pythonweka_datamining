@@ -1,0 +1,11 @@
+1.0 Clothes -> Chicken
+0.8 Chicken -> Milk
+1.0 Milk -> Chicken
+1.0 Clothes -> Milk
+1.0 Clothes -> Milk, Chicken
+1.0 Clothes -> Chicken
+1.0 Milk -> Chicken
+0.8 Chicken -> Milk
+1.0 Clothes -> Milk
+1.0 Milk, Clothes -> Chicken
+1.0 Chicken, Clothes -> Milk
