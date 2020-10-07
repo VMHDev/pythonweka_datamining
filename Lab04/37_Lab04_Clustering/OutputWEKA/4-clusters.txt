@@ -1,0 +1,116 @@
+=== Run information ===
+
+Scheme:       weka.clusterers.SimpleKMeans -init 0 -max-candidates 100 -periodic-pruning 10000 -min-density 2.0 -t1 -1.25 -t2 -1.0 -V -N 4 -A "weka.core.EuclideanDistance -R first-last" -I 500 -num-slots 1 -S 10
+Relation:     cardiology-weka.filters.unsupervised.attribute.RenameAttribute-find([\s\S]+)-replacegender-R2-weka.filters.unsupervised.attribute.ReplaceMissingValues
+Instances:    303
+Attributes:   14
+              age
+              gender
+              chest-pain-type
+              blood-pressure
+              cholesterol
+              Fasting-blood-sugar<120
+              resting-ecg
+              maximum-heart-rate
+              angina
+              peak
+              slope
+              #colored-vessels
+              thal
+              heart-condition
+Test mode:    evaluate on training data
+
+
+=== Clustering model (full training set) ===
+
+
+kMeans
+======
+
+Number of iterations: 5
+Within cluster sum of squared errors: 589.2698207215766
+
+Initial starting points (random):
+
+Cluster 0: 44,Male,AbnormalAngina,130,219,FALSE,Hyp,188,FALSE,0,Up,0,Normal,Healthy
+Cluster 1: 62,Female,Asymptomatic,124,209,FALSE,Normal,163,FALSE,0,Up,0,Normal,Healthy
+Cluster 2: 52,Male,Angina,118,186,FALSE,Hyp,190,FALSE,0,Flat,0,Fix,Healthy
+Cluster 3: 52,Male,Asymptomatic,128,255,FALSE,Normal,161,TRUE,0,Up,1,Rev,Sick
+
+Missing values globally replaced with mean/mode
+
+Final cluster centroids:
+                                                     Cluster#
+Attribute                         Full Data                 0                 1                 2                 3
+                                    (303.0)            (63.0)            (84.0)            (42.0)           (114.0)
+===================================================================================================================
+age                                 54.3233           49.8305           53.0357           58.0952           56.3653
+                                  +/-9.0418          +/-8.426           +/-9.85         +/-7.2543         +/-8.1975
+
+gender                                 Male              Male            Female              Male              Male
+  Male                          207.0 ( 68%)       53.0 ( 84%)       24.0 ( 28%)       37.0 ( 88%)       93.0 ( 81%)
+  Female                         96.0 ( 31%)       10.0 ( 15%)       60.0 ( 71%)        5.0 ( 11%)       21.0 ( 18%)
+
+chest-pain-type                Asymptomatic    AbnormalAngina            NoTang            NoTang      Asymptomatic
+  Asymptomatic                  143.0 ( 47%)       14.0 ( 22%)       18.0 ( 21%)        5.0 ( 11%)      106.0 ( 92%)
+  AbnormalAngina                 50.0 ( 16%)       37.0 ( 58%)       10.0 ( 11%)        1.0 (  2%)        2.0 (  1%)
+  Angina                         23.0 (  7%)        5.0 (  7%)        5.0 (  5%)       11.0 ( 26%)        2.0 (  1%)
+  NoTang                         87.0 ( 28%)        7.0 ( 11%)       51.0 ( 60%)       25.0 ( 59%)        4.0 (  3%)
+
+blood-pressure                     131.6238          129.5556           128.381          133.6429          134.4123
+                                 +/-17.5381        +/-15.3021        +/-17.2891        +/-17.7583          +/-18.44
+
+cholesterol                         246.264          241.1905          244.2738          246.6667           250.386
+                                 +/-51.8308        +/-39.4498        +/-54.8565        +/-65.4875        +/-50.2483
+
+Fasting-blood-sugar<120               FALSE             FALSE             FALSE             FALSE             FALSE
+  FALSE                         258.0 ( 85%)       55.0 ( 87%)       75.0 ( 89%)       32.0 ( 76%)       96.0 ( 84%)
+  TRUE                           45.0 ( 14%)        8.0 ( 12%)        9.0 ( 10%)       10.0 ( 23%)       18.0 ( 15%)
+
+resting-ecg                          Normal               Hyp            Normal               Hyp               Hyp
+  Hyp                           147.0 ( 48%)       38.0 ( 60%)       18.0 ( 21%)       26.0 ( 61%)       65.0 ( 57%)
+  Normal                        152.0 ( 50%)       25.0 ( 39%)       65.0 ( 77%)       16.0 ( 38%)       46.0 ( 40%)
+  Abnormal                        4.0 (  1%)        0.0 (  0%)        1.0 (  1%)        0.0 (  0%)        3.0 (  2%)
+
+maximum-heart-rate                 149.6469          164.5079          156.1905          153.0238          135.3684
+                                 +/-22.9052         +/-17.739        +/-19.4877        +/-17.6449         +/-21.742
+
+angina                                FALSE             FALSE             FALSE             FALSE              TRUE
+  TRUE                           99.0 ( 32%)        6.0 (  9%)        7.0 (  8%)        3.0 (  7%)       83.0 ( 72%)
+  FALSE                         204.0 ( 67%)       57.0 ( 90%)       77.0 ( 91%)       39.0 ( 92%)       31.0 ( 27%)
+
+peak                                 1.0396            0.3381            0.5488            1.3048            1.6912
+                                  +/-1.1611         +/-0.5749         +/-0.7227         +/-1.0291         +/-1.3213
+
+slope                                  Flat                Up                Up              Flat              Flat
+  Flat                          145.0 ( 47%)        9.0 ( 14%)       22.0 ( 26%)       34.0 ( 80%)       80.0 ( 70%)
+  Up                            137.0 ( 45%)       51.0 ( 80%)       59.0 ( 70%)        4.0 (  9%)       23.0 ( 20%)
+  Down                           21.0 (  6%)        3.0 (  4%)        3.0 (  3%)        4.0 (  9%)       11.0 (  9%)
+
+#colored-vessels                     0.6667            0.3016            0.3452            0.5952            1.1316
+                                  +/-0.9338         +/-0.6871         +/-0.6854         +/-0.9386         +/-1.0177
+
+thal                                 Normal            Normal            Normal               Rev               Rev
+  Rev                           118.0 ( 38%)        9.0 ( 14%)        4.0 (  4%)       25.0 ( 59%)       80.0 ( 70%)
+  Normal                        167.0 ( 55%)       52.0 ( 82%)       80.0 ( 95%)       13.0 ( 30%)       22.0 ( 19%)
+  Fix                            18.0 (  5%)        2.0 (  3%)        0.0 (  0%)        4.0 (  9%)       12.0 ( 10%)
+
+heart-condition                     Healthy           Healthy           Healthy           Healthy              Sick
+  Sick                          138.0 ( 45%)       11.0 ( 17%)        6.0 (  7%)       14.0 ( 33%)      107.0 ( 93%)
+  Healthy                       165.0 ( 54%)       52.0 ( 82%)       78.0 ( 92%)       28.0 ( 66%)        7.0 (  6%)
+
+
+
+
+
+Time taken to build model (full training data) : 0.03 seconds
+
+=== Model and evaluation on training set ===
+
+Clustered Instances
+
+0       63 ( 21%)
+1       84 ( 28%)
+2       42 ( 14%)
+3      114 ( 38%)
+

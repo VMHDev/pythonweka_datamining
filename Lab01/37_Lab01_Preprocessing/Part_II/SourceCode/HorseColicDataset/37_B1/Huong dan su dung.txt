@@ -1,0 +1,19 @@
+Chuong trinh ho tro cac chuc nang
+a. Chuan hoa min-max theo thuoc tinh chi dinh
+b. Chuan hoa z-score theo thuoc tinh chi dinh
+c. Roi rac hoa bang cach chia gio theo chieu rong theo thuoc tinh chi dinh
+d. Roi rac hoa bang cach chia gio theo chieu sau theo thuoc tinh chi dinh
+e. Xoa cac du lieu bi rong theo thuoc tinh chi dinh
+f. Dien cac thuoc tinh bi rong theo trung binh (neu la du lieu so) hoac theo phan tu co tan so xuat hien cao nhat
+(neu ko phai du lieu so) theo thuoc tinh chi dinh
+
+Cach thuc thi chuong trinh chay bang cmd:
+Co 2 cach de thuc thi chuong trinh:
+1. Thuc thi bang file py: 
+	python <ten chuong trinh .py> <file input .csv> <file output .csv> <CHUC NANG> <DANH SACH THUOC TINH> <OPTIONAL>
+2. Thuc thi bang file .exe theo duong dan Executable/dist/37_B1: 
+	<ten chuong trinh .exe> <file input .csv> <file output .csv> <CHUC NANG> <DANH SACH THUOC TINH> <OPTIONAL>
+
+<CHUC NANG> : Chon 1 trong cac chuc nang tu : a->f
+<DANH SACH THUOC TINH>: Mo file input, chon thuoc tinh phu hop
+<OPTIONAL>: chuc nang c va d, se co them du lieu dau vao la so luong gio can chia

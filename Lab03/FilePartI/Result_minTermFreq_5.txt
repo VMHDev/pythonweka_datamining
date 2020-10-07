@@ -1,0 +1,450 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.meta.FilteredClassifier -F "weka.filters.unsupervised.attribute.StringToWordVector -R first-last -W 1000 -prune-rate -1.0 -N 0 -stemmer weka.core.stemmers.NullStemmer -stopwords-handler weka.core.stopwords.Null -M 5 -tokenizer \"weka.core.tokenizers.WordTokenizer -delimiters \\\" \\\\r\\\\n\\\\t.,;:\\\\\\\'\\\\\\\"()?!\\\"\"" -S 1 -W weka.classifiers.bayes.NaiveBayes
+Relation:     tweets
+Instances:    200
+Attributes:   2
+              tweet_body
+              sentiment
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+FilteredClassifier using weka.classifiers.bayes.NaiveBayes  on data filtered through weka.filters.unsupervised.attribute.StringToWordVector -R 1 -W 1000 -prune-rate -1.0 -N 0 -stemmer weka.core.stemmers.NullStemmer -stopwords-handler weka.core.stopwords.Null -M 5 -tokenizer "weka.core.tokenizers.WordTokenizer -delimiters \" \\r\\n\\t.,;:\\\'\\\"()?!\""
+
+Filtered Header
+@relation 'tweets-weka.filters.unsupervised.attribute.StringToWordVector-R1-W1000-prune-rate-1.0-N0-stemmerweka.core.stemmers.NullStemmer-stopwords-handlerweka.core.stopwords.Null-M5-tokenizerweka.core.tokenizers.WordTokenizer -delimiters \" \\r\\n\\t.,;:\\\'\\\"()?!\"'
+
+@attribute sentiment {pos,neg}
+@attribute - numeric
+@attribute I numeric
+@attribute URL numeric
+@attribute a numeric
+@attribute and numeric
+@attribute are numeric
+@attribute be numeric
+@attribute but numeric
+@attribute can numeric
+@attribute for numeric
+@attribute get numeric
+@attribute happy numeric
+@attribute have numeric
+@attribute he numeric
+@attribute i numeric
+@attribute if numeric
+@attribute in numeric
+@attribute is numeric
+@attribute it numeric
+@attribute m numeric
+@attribute me numeric
+@attribute my numeric
+@attribute need numeric
+@attribute of numeric
+@attribute on numeric
+@attribute s numeric
+@attribute t numeric
+@attribute that numeric
+@attribute the numeric
+@attribute this numeric
+@attribute to numeric
+@attribute very numeric
+@attribute with numeric
+@attribute you numeric
+@attribute your numeric
+@attribute No numeric
+@attribute about numeric
+@attribute all numeric
+@attribute at numeric
+@attribute been numeric
+@attribute day numeric
+@attribute don numeric
+@attribute go numeric
+@attribute gone numeric
+@attribute got numeric
+@attribute had numeric
+@attribute just numeric
+@attribute like numeric
+@attribute no numeric
+@attribute out numeric
+@attribute so numeric
+@attribute time numeric
+@attribute up numeric
+@attribute what numeric
+@attribute will numeric
+@attribute work numeric
+
+@data
+
+
+Classifier Model
+Naive Bayes Classifier
+
+                Class
+Attribute         pos    neg
+                (0.5)  (0.5)
+=============================
+-
+  mean            0.07   0.07
+  std. dev.     0.2551 0.2551
+  weight sum       100    100
+  precision          1      1
+
+I
+  mean            0.24   0.39
+  std. dev.     0.4271 0.4877
+  weight sum       100    100
+  precision          1      1
+
+URL
+  mean            0.07   0.03
+  std. dev.     0.2551 0.1706
+  weight sum       100    100
+  precision          1      1
+
+a
+  mean            0.19   0.31
+  std. dev.     0.3923 0.4625
+  weight sum       100    100
+  precision          1      1
+
+and
+  mean            0.18   0.16
+  std. dev.     0.3842 0.3666
+  weight sum       100    100
+  precision          1      1
+
+are
+  mean            0.05   0.05
+  std. dev.     0.2179 0.2179
+  weight sum       100    100
+  precision          1      1
+
+be
+  mean            0.07   0.09
+  std. dev.     0.2551 0.2862
+  weight sum       100    100
+  precision          1      1
+
+but
+  mean            0.09    0.1
+  std. dev.     0.2862    0.3
+  weight sum       100    100
+  precision          1      1
+
+can
+  mean            0.08   0.06
+  std. dev.     0.2713 0.2375
+  weight sum       100    100
+  precision          1      1
+
+for
+  mean            0.15   0.19
+  std. dev.     0.3571 0.3923
+  weight sum       100    100
+  precision          1      1
+
+get
+  mean            0.05   0.07
+  std. dev.     0.2179 0.2551
+  weight sum       100    100
+  precision          1      1
+
+happy
+  mean            0.05      0
+  std. dev.     0.2179 0.1667
+  weight sum       100    100
+  precision          1      1
+
+have
+  mean            0.09   0.12
+  std. dev.     0.2862  0.325
+  weight sum       100    100
+  precision          1      1
+
+he
+  mean            0.04   0.02
+  std. dev.      0.196 0.1667
+  weight sum       100    100
+  precision          1      1
+
+i
+  mean            0.13   0.09
+  std. dev.     0.3363 0.2862
+  weight sum       100    100
+  precision          1      1
+
+if
+  mean            0.06   0.02
+  std. dev.     0.2375 0.1667
+  weight sum       100    100
+  precision          1      1
+
+in
+  mean            0.12   0.17
+  std. dev.      0.325 0.3756
+  weight sum       100    100
+  precision          1      1
+
+is
+  mean            0.15   0.16
+  std. dev.     0.3571 0.3666
+  weight sum       100    100
+  precision          1      1
+
+it
+  mean            0.16   0.17
+  std. dev.     0.3666 0.3756
+  weight sum       100    100
+  precision          1      1
+
+m
+  mean            0.07   0.11
+  std. dev.     0.2551 0.3129
+  weight sum       100    100
+  precision          1      1
+
+me
+  mean            0.17   0.12
+  std. dev.     0.3756  0.325
+  weight sum       100    100
+  precision          1      1
+
+my
+  mean            0.13   0.23
+  std. dev.     0.3363 0.4208
+  weight sum       100    100
+  precision          1      1
+
+need
+  mean            0.04   0.03
+  std. dev.      0.196 0.1706
+  weight sum       100    100
+  precision          1      1
+
+of
+  mean            0.17   0.12
+  std. dev.     0.3756  0.325
+  weight sum       100    100
+  precision          1      1
+
+on
+  mean            0.11   0.16
+  std. dev.     0.3129 0.3666
+  weight sum       100    100
+  precision          1      1
+
+s
+  mean            0.14   0.12
+  std. dev.      0.347  0.325
+  weight sum       100    100
+  precision          1      1
+
+t
+  mean            0.11    0.2
+  std. dev.     0.3129    0.4
+  weight sum       100    100
+  precision          1      1
+
+that
+  mean            0.11   0.12
+  std. dev.     0.3129  0.325
+  weight sum       100    100
+  precision          1      1
+
+the
+  mean            0.22   0.29
+  std. dev.     0.4142 0.4538
+  weight sum       100    100
+  precision          1      1
+
+this
+  mean            0.05   0.05
+  std. dev.     0.2179 0.2179
+  weight sum       100    100
+  precision          1      1
+
+to
+  mean            0.33   0.37
+  std. dev.     0.4702 0.4828
+  weight sum       100    100
+  precision          1      1
+
+very
+  mean            0.05   0.03
+  std. dev.     0.2179 0.1706
+  weight sum       100    100
+  precision          1      1
+
+with
+  mean            0.06    0.1
+  std. dev.     0.2375    0.3
+  weight sum       100    100
+  precision          1      1
+
+you
+  mean            0.19   0.06
+  std. dev.     0.3923 0.2375
+  weight sum       100    100
+  precision          1      1
+
+your
+  mean            0.07   0.07
+  std. dev.     0.2551 0.2551
+  weight sum       100    100
+  precision          1      1
+
+No
+  mean            0.02   0.05
+  std. dev.     0.1667 0.2179
+  weight sum       100    100
+  precision          1      1
+
+about
+  mean            0.03   0.05
+  std. dev.     0.1706 0.2179
+  weight sum       100    100
+  precision          1      1
+
+all
+  mean            0.03   0.05
+  std. dev.     0.1706 0.2179
+  weight sum       100    100
+  precision          1      1
+
+at
+  mean            0.04   0.08
+  std. dev.      0.196 0.2713
+  weight sum       100    100
+  precision          1      1
+
+been
+  mean            0.02   0.07
+  std. dev.     0.1667 0.2551
+  weight sum       100    100
+  precision          1      1
+
+day
+  mean            0.03   0.05
+  std. dev.     0.1706 0.2179
+  weight sum       100    100
+  precision          1      1
+
+don
+  mean            0.03   0.06
+  std. dev.     0.1706 0.2375
+  weight sum       100    100
+  precision          1      1
+
+go
+  mean            0.01   0.05
+  std. dev.     0.1667 0.2179
+  weight sum       100    100
+  precision          1      1
+
+gone
+  mean               0   0.05
+  std. dev.     0.1667 0.2179
+  weight sum       100    100
+  precision          1      1
+
+got
+  mean            0.01   0.05
+  std. dev.     0.1667 0.2179
+  weight sum       100    100
+  precision          1      1
+
+had
+  mean            0.02   0.05
+  std. dev.     0.1667 0.2179
+  weight sum       100    100
+  precision          1      1
+
+just
+  mean            0.03   0.06
+  std. dev.     0.1706 0.2375
+  weight sum       100    100
+  precision          1      1
+
+like
+  mean            0.03   0.07
+  std. dev.     0.1706 0.2551
+  weight sum       100    100
+  precision          1      1
+
+no
+  mean            0.01   0.05
+  std. dev.     0.1667 0.2179
+  weight sum       100    100
+  precision          1      1
+
+out
+  mean            0.04   0.06
+  std. dev.      0.196 0.2375
+  weight sum       100    100
+  precision          1      1
+
+so
+  mean            0.01   0.08
+  std. dev.     0.1667 0.2713
+  weight sum       100    100
+  precision          1      1
+
+time
+  mean            0.02   0.06
+  std. dev.     0.1667 0.2375
+  weight sum       100    100
+  precision          1      1
+
+up
+  mean            0.03   0.09
+  std. dev.     0.1706 0.2862
+  weight sum       100    100
+  precision          1      1
+
+what
+  mean            0.01   0.05
+  std. dev.     0.1667 0.2179
+  weight sum       100    100
+  precision          1      1
+
+will
+  mean            0.01   0.06
+  std. dev.     0.1667 0.2375
+  weight sum       100    100
+  precision          1      1
+
+work
+  mean            0.03   0.05
+  std. dev.     0.1706 0.2179
+  weight sum       100    100
+  precision          1      1
+
+
+
+Time taken to build model: 0.01 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         105               52.5    %
+Incorrectly Classified Instances        95               47.5    %
+Kappa statistic                          0.05  
+Mean absolute error                      0.4609
+Root mean squared error                  0.5731
+Relative absolute error                 92.1732 %
+Root relative squared error            114.6284 %
+Total Number of Instances              200     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.550    0.500    0.524      0.550    0.537      0.050    0.562     0.557     pos
+                 0.500    0.450    0.526      0.500    0.513      0.050    0.562     0.541     neg
+Weighted Avg.    0.525    0.475    0.525      0.525    0.525      0.050    0.562     0.549     
+
+=== Confusion Matrix ===
+
+  a  b   <-- classified as
+ 55 45 |  a = pos
+ 50 50 |  b = neg
+
