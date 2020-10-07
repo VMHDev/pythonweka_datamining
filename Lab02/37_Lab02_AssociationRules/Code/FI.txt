@@ -1,0 +1,11 @@
+0.57 Beef
+0.57 Cheese
+0.71 Chicken
+0.43 Clothes
+0.57 Milk
+0.43 Beef, Cheese
+0.43 Beef, Chicken
+0.43 Chicken, Clothes
+0.57 Chicken, Milk
+0.43 Clothes, Milk
+0.43 Chicken, Clothes, Milk
